@@ -3,7 +3,7 @@ import hljs from "@highlightjs/cdn-assets/highlight.min.js"
 import { AnsiUp } from "ansi_up"
 const ansi_up = new AnsiUp
 
-const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin/Resources/Code/`
+const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`
 const tplFile = `${htmlDir}Code.html`
 
 let prompt = cmd => [`echo "[$USER@$HOSTNAME $PWD]$([ "$UID" = 0 ]&&echo "#"||echo "$") ";${cmd}`]
@@ -32,31 +32,31 @@ export class RemoteCommand extends plugin {
       priority: 10,
       rule: [
         {
-          reg: "^rjp.+",
+          reg: "^#rjp.+",
           fnc: "JSPic"
         },
         {
-          reg: "^rj.+",
+          reg: "^#rj.+",
           fnc: "JS"
         },
         {
-          reg: "^rcp.+",
+          reg: "^#rcp.+",
           fnc: "ShellPic"
         },
         {
-          reg: "^rc.+",
+          reg: "^#rc.+",
           fnc: "Shell"
         },
         {
-          reg: "^dm.+",
+          reg: "^#dm.+",
           fnc: "DirectMsg"
         },
         {
-          reg: "^mm.+",
+          reg: "^#mm.+",
           fnc: "MultiMsg"
         },
         {
-          reg: "^fm.+",
+          reg: "^#fm.+",
           fnc: "ForwardMsg"
         }
       ]
@@ -78,7 +78,7 @@ export class RemoteCommand extends plugin {
 
   async JS() {
     if (!this.e.isMaster) return false
-    const cmd = this.e.msg.replace(/rjp?/, "").trim()
+    const cmd = this.e.msg.replace(/#rjp?/, "").trim()
 
     logger.mark(`[远程命令] 执行Js：${logger.blue(cmd)}`)
     const ret = await this.evalSync(cmd, data => Bot.String(data))
@@ -94,7 +94,7 @@ export class RemoteCommand extends plugin {
 
   async JSPic() {
     if (!this.e.isMaster) return false
-    const cmd = this.e.msg.replace("rjp", "").trim()
+    const cmd = this.e.msg.replace("#rjp", "").trim()
 
     logger.mark(`[远程命令] 执行Js：${logger.blue(cmd)}`)
     const ret = await this.evalSync(cmd, data => Bot.Loging(data))
@@ -116,7 +116,7 @@ export class RemoteCommand extends plugin {
 
   async Shell() {
     if (!this.e.isMaster) return false
-    const cmd = this.e.msg.replace(/rcp?/, "").trim()
+    const cmd = this.e.msg.replace(/#rcp?/, "").trim()
     const ret = await Bot.exec(...prompt(cmd))
 
     if (!ret.stdout && !ret.stderr && !ret.error)
@@ -131,7 +131,7 @@ export class RemoteCommand extends plugin {
 
   async ShellPic() {
     if (!this.e.isMaster) return false
-    const cmd = this.e.msg.replace("rcp", "").trim()
+    const cmd = this.e.msg.replace("#rcp", "").trim()
     const ret = await Bot.exec(...prompt(cmd))
 
     if (!ret.stdout && !ret.stderr && !ret.error)
@@ -152,7 +152,7 @@ export class RemoteCommand extends plugin {
   }
 
   async CatchReply(msg) {
-    const rets = [], echo = /^[dmf]mp/.test(this.e.msg)
+    const rets = [], echo = /^#[dmf]mp/.test(this.e.msg)
     let Code = []
     try {
       for (const i of msg) {
@@ -178,7 +178,7 @@ export class RemoteCommand extends plugin {
 
   async DirectMsg() {
     if (!this.e.isMaster) return false
-    const ret = await this.evalSync(this.e.msg.replace(/^dmp?/, ""), false, true)
+    const ret = await this.evalSync(this.e.msg.replace(/^#dmp?/, ""), false, true)
     if (ret.error)
       return this.reply(`错误：\n${ret.error.stack}`, true)
     const m = []
@@ -190,7 +190,7 @@ export class RemoteCommand extends plugin {
 
   async MultiMsg() {
     if (!this.e.isMaster) return false
-    const ret = await this.evalSync(this.e.msg.replace(/^mmp?/, ""), false, true)
+    const ret = await this.evalSync(this.e.msg.replace(/^#mmp?/, ""), false, true)
     if (ret.error)
       return this.reply(`错误：\n${ret.error.stack}`, true)
     const m = []
@@ -202,7 +202,7 @@ export class RemoteCommand extends plugin {
 
   async ForwardMsg() {
     if (!this.e.isMaster) return false
-    const ret = await this.evalSync(this.e.msg.replace(/^fmp?/, ""), false, true)
+    const ret = await this.evalSync(this.e.msg.replace(/^#fmp?/, ""), false, true)
     if (ret.error)
       return this.reply(`错误：\n${ret.error.stack}`, true)
     const m = []

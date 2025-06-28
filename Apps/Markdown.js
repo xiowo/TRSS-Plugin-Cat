@@ -4,7 +4,7 @@ import puppeteer from "../../../lib/puppeteer/puppeteer.js"
 import MarkdownIt from "markdown-it"
 const md = new MarkdownIt({ html: true })
 
-const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin/Resources/Markdown/`
+const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Markdown/`
 const tplFile = `${htmlDir}Markdown.html`
 
 export class Markdown extends plugin {
@@ -16,7 +16,7 @@ export class Markdown extends plugin {
       priority: 10,
       rule: [
         {
-          reg: "^md.+",
+          reg: "^#md.+",
           fnc: "Markdown"
         }
       ]
@@ -25,7 +25,7 @@ export class Markdown extends plugin {
 
   async Markdown(e) {
     if (!this.e.isMaster) return false
-    const msg = this.e.msg.replace("md", "").trim()
+    const msg = this.e.msg.replace("#md", "").trim()
     logger.mark(`[Markdown] 查看：${logger.blue(msg)}`)
 
     let mdFile = msg

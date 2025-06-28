@@ -3,7 +3,7 @@ import File from "../Model/file.js"
 import path from "path"
 import puppeteer from "../../../lib/puppeteer/puppeteer.js"
 
-const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin/Resources/SourceCode/`
+const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/SourceCode/`
 const tplFile = `${htmlDir}SourceCode.html`
 
 export class SourceCode extends plugin {
@@ -15,7 +15,7 @@ export class SourceCode extends plugin {
       priority: -Infinity,
       rule: [
         {
-          reg: "^sc(\\d+~\\d+)?.+",
+          reg: "^#sc(\\d+~\\d+)?.+",
           fnc: "SourceCode"
         }
       ]
@@ -24,7 +24,7 @@ export class SourceCode extends plugin {
 
   async SourceCode() {
     if (!this.e.isMaster) return false
-    const msg = this.e.msg.replace(/sc(\d+~\d+)?/, "").trim()
+    const msg = this.e.msg.replace(/#sc(\d+~\d+)?/, "").trim()
     logger.mark(`[SourceCode] 查看：${logger.blue(msg)}`)
 
     let scFile = msg
@@ -43,7 +43,7 @@ export class SourceCode extends plugin {
       return false
     }
     let fData = await fs.readFile(scFile, "utf-8")
-    const rows = this.e.msg.match(/sc(\d+~\d+)/)?.[1]?.split("~")
+    const rows = this.e.msg.match(/#sc(\d+~\d+)/)?.[1]?.split("~")
     if (rows) {
       fData = fData.split("\n").slice(rows[0] - 1, rows[1]).join("\n")
     }

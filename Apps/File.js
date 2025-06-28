@@ -13,15 +13,15 @@ export class File extends plugin {
       priority: -Infinity,
       rule: [
         {
-          reg: "^文件查看",
+          reg: "^#文件查看",
           fnc: "List"
         },
         {
-          reg: "^文件上传",
+          reg: "^#文件上传",
           fnc: "Upload"
         },
         {
-          reg: "^文件下载",
+          reg: "^#文件下载",
           fnc: "DownloadDetect"
         }
       ]
@@ -32,7 +32,7 @@ export class File extends plugin {
     if (!this.e.isMaster) return false
 
     this.finish("List")
-    let filePath = this.e.msg.replace("文件查看", "").trim()
+    let filePath = this.e.msg.replace("#文件查看", "").trim()
     if (!filePath) {
       this.setContext("List")
       await this.reply("请发送路径", true)
@@ -56,7 +56,7 @@ export class File extends plugin {
     }
 
     this.finish("Upload")
-    let filePath = this.e.msg.replace("文件上传", "").trim()
+    let filePath = this.e.msg.replace("#文件上传", "").trim()
     if (!filePath) {
       this.setContext("Upload")
       await this.reply("请发送文件路径", true)
@@ -113,7 +113,7 @@ export class File extends plugin {
     if (!this.e.file) return false
 
     this.finish("Download")
-    const filePath = `${es.msg.replace("文件下载", "").trim() || process.cwd()}/${this.e.file.name}`
+    const filePath = `${es.msg.replace("#文件下载", "").trim() || process.cwd()}/${this.e.file.name}`
     let fileUrl
     if (this.e.file.url)
       fileUrl = this.e.file.url

@@ -54,7 +54,7 @@ if (!Bot.exec) {
       stdout = String(stdout).trim()
       stderr = String(stderr).trim()
       resolve({ error, stdout, stderr, raw })
-      logger[opts.quiet ? "debug" : "mark"](`[执行命令] ${name} ${logger.green(`[完成${Date.now()-start_time}ms]`)} ${stdout?`\n${stdout}`:""}${stderr?logger.red(`\n${stderr}`):""}`)
+      logger[opts.quiet ? "debug" : "mark"](`[执行命令] ${name} ${logger.green(`[完成${Date.now() - start_time}ms]`)} ${stdout ? `\n${stdout}` : ""}${stderr ? logger.red(`\n${stderr}`) : ""}`)
       if (error) logger[opts.quiet ? "debug" : "error"]("[执行命令]", error)
     }
     const start_time = Date.now()
@@ -65,12 +65,14 @@ if (!Bot.exec) {
   })
 }
 
-Bot.fsStat ??= async path => { try {
-  return await fs.stat(path)
-} catch (err) {
-  logger.trace("获取", path, "状态错误", err)
-  return false
-}}
+Bot.fsStat ??= async path => {
+  try {
+    return await fs.stat(path)
+  } catch (err) {
+    logger.trace("获取", path, "状态错误", err)
+    return false
+  }
+}
 
 Bot.glob ??= async (path, opts = {}) => {
   if (!opts.force && await Bot.fsStat(path))
@@ -86,7 +88,7 @@ Bot.glob ??= async (path, opts = {}) => {
   return array
 }
 
-const files = (await fs.readdir("plugins/TRSS-Plugin/Apps"))
+const files = (await fs.readdir("plugins/TRSS-Plugin-Cat/Apps"))
   .filter(file => file.endsWith(".js"))
 
 const ret = await Promise.allSettled(

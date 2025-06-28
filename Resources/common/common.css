@@ -32,8 +32,13 @@
     src: url("../fonts/Inconsolata.ttf");
 }
 
+@font-face {
+    font-family: "寒蝉全圆体";
+    src: url("../fonts/ChillRoundFBold.ttf");
+}
+
 .container {
-    background: url("../../../miao-plugin/resources/admin/imgs/bg.png") #b5b5b5 center top no-repeat;
+    background: url("../img/bg.png") #b5b5b5 center top no-repeat;
     padding: 10px 20px;
     background-size: cover;
     font-family: consola, Inconsolata monospace;
@@ -78,17 +83,18 @@ pre {
 .title,
 .copyright {
     text-align: center;
-    color: #000;
-    text-shadow: 0px 0px 2px #fff;
+    color: #6c6c6c;
     font-weight: bold;
+    font-family: "寒蝉全圆体";
 }
 
 .title {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 10px;
 }
 
 .copyright {
-    font-size: 30px;
     margin-top: 10px;
+    color: #666;
+    font-size: 14px;
 }

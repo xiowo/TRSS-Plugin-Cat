@@ -2,11 +2,11 @@ import puppeteer from "../../../lib/puppeteer/puppeteer.js"
 import { AnsiUp } from "ansi_up"
 const ansi_up = new AnsiUp
 
-const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin/Resources/Code/`
+const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`
 const tplFile = `${htmlDir}Code.html`
 const path = `${process.env.HOME}/../`
 const cmdPath = `${path}Main.sh`
-const errorTips = "请使用脚本安装，再使用此功能\nhttps://Yunzai.TRSS.me\nhttps://TRSS.me"
+const errorTips = "出错了喵~"
 
 export class Script extends plugin {
   constructor() {
@@ -17,7 +17,7 @@ export class Script extends plugin {
       priority: -Infinity,
       rule: [
         {
-          reg: "^脚本执行.+",
+          reg: "^#脚本执行.+",
           fnc: "Script"
         }
       ]
@@ -48,7 +48,7 @@ export class Script extends plugin {
 
   async Script(e) {
     if (!this.e.isMaster) return false
-    const msg = this.e.msg.replace("脚本执行", "").trim()
+    const msg = this.e.msg.replace("#脚本执行", "").trim()
     const cmd = `bash "${cmdPath}" cmd "${msg}"`
     await this.execTask(e, cmd)
   }

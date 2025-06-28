@@ -2,9 +2,9 @@ import puppeteer from "../../../lib/puppeteer/puppeteer.js"
 import { AnsiUp } from "ansi_up"
 const ansi_up = new AnsiUp
 
-const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin/Resources/Code/`,
+const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`,
   tplFile = `${htmlDir}Code.html`,
-  errorTips = "未使用脚本安装，此功能出错属于正常情况\nhttps://TRSS.me",
+  errorTips = "出错了喵~",
   cmds = `fastfetch --pipe false`,
   cmd = `fastfetch --pipe -l none`
 
@@ -22,15 +22,15 @@ export class SystemInfo extends plugin {
       priority: 10,
       rule: [
         {
-          reg: "^#?系统信息$",
+          reg: "^#系统信息$",
           fnc: "SystemInfo"
         },
         {
-          reg: "^#?系统信息图片$",
+          reg: "^#系统信息图片$",
           fnc: "SystemInfoPic"
         },
         {
-          reg: "^#?系统测试$",
+          reg: "^#系统测试$",
           fnc: "SystemBench"
         }
       ]
