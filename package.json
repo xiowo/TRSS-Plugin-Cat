@@ -1,7 +1,7 @@
 {
   "name": "TRSS-Plugin-Cat",
   "type": "module",
-  "author": "TimeRainStarSky",
+  "author": "TimeRainStarSky,MortalCat",
   "dependencies": {
     "@highlightjs/cdn-assets": "^11.10.0",
     "ansi_up": "^6.0.2",
