@@ -34,4 +34,11 @@
 - #dm(单条消息) / #mm(多条消息) / #fm(转发消息) + `JavaScript 表达式`
 - #rcp / #rjp / #dmp / #mmp / #fmp 以图片显示输出
 
-</details
+</details>
+
+
+<details><summary>文件操作（权限：主人）</summary>
+
+- 文件查看 / 文件上传 / 文件下载 + `路径`
+
+</details>

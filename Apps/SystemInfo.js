@@ -8,11 +8,6 @@ const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`,
   cmds = `fastfetch --pipe false`,
   cmd = `fastfetch --pipe -l none`
 
-let benchcmd = "bash <(curl -L bench.sh)", Running
-
-if (process.platform == "win32")
-  benchcmd = `bash -c "${benchcmd}"`
-
 export class SystemInfo extends plugin {
   constructor() {
     super({
@@ -28,10 +23,6 @@ export class SystemInfo extends plugin {
         {
           reg: "^#系统信息图片$",
           fnc: "SystemInfoPic"
-        },
-        {
-          reg: "^#系统测试$",
-          fnc: "SystemBench"
         }
       ]
     })
@@ -61,27 +52,5 @@ export class SystemInfo extends plugin {
     const Code = await ansi_up.ansi_to_html(ret.stdout.trim())
     const img = await puppeteer.screenshot("Code", { tplFile, htmlDir, Code })
     await this.reply(img, true)
-  }
-
-  async SystemBench(e) {
-    if (Running) {
-      await this.reply("正在测试，请稍等……", true)
-      return false
-    }
-    Running = true
-    await this.reply("开始测试，请稍等……", true)
-
-    const ret = await Bot.exec(benchcmd)
-
-    if (ret.error) {
-      logger.error(`系统测试错误：${logger.red(ret.error)}`)
-      await this.reply(`系统测试错误：${ret.error}`, true)
-      await this.reply(errorTips)
-    }
-
-    const Code = await ansi_up.ansi_to_html(ret.stdout.trim())
-    const img = await puppeteer.screenshot("Code", { tplFile, htmlDir, Code })
-    await this.reply(img, true)
-    Running = false
   }
 }
