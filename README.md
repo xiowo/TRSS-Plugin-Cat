@@ -1,17 +1,19 @@
-# TRSS Yunzai Plugin
+# TRSS Cat Yunzai Plugin
 
-云崽机器人插件
+基于原插件精简，移除了一些不需要的功能
+
 ## 安装教程
 
 <details><summary>系统信息</summary>
 
-- #系统信息 / #系统信息图片 / #系统测试
+- #系统信息 / #系统信息图片
 
+需安装 `fastfetch` 才能使用
 </details>
 
 <details><summary>二维码生成</summary>
 
-- #二维码 + `文字`
+- #二维码/qr + `文字`
 
 </details>
 
@@ -33,12 +35,5 @@
 - #rj + `JavaScript 命令`
 - #dm(单条消息) / #mm(多条消息) / #fm(转发消息) + `JavaScript 表达式`
 - #rcp / #rjp / #dmp / #mmp / #fmp 以图片显示输出
-
-</details>
-
-
-<details><summary>文件操作（权限：主人）</summary>
-
-- 文件查看 / 文件上传 / 文件下载 + `路径`
 
 </details>
