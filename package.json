@@ -6,6 +6,8 @@
     "@highlightjs/cdn-assets": "^11.10.0",
     "ansi_up": "^6.0.2",
     "highlightjs-line-numbers.js": "^2.8.0",
+    "jimp": "^1.6.0",
+    "jsqr": "^1.4.0",
     "markdown-it": "^14.1.0",
     "qrcode": "^1.5.4"
   }

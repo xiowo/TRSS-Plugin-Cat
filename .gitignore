@@ -7,3 +7,4 @@ data/
 temp/
 *.css.map
 pnpm-lock.yaml
+package-lock.json
