@@ -32,6 +32,10 @@ export class SystemInfo extends plugin {
     const ret = await Bot.exec(cmd)
 
     if (ret.error) {
+      if (String(ret.error).includes("fastfetch: not found") || String(ret.stderr).includes("fastfetch: not found")) {
+        await this.reply("请确认FastFetch是否安装", true)
+        return
+      }
       logger.error(`系统信息错误：${logger.red(ret.error)}`)
       await this.reply(`系统信息错误：${ret.error}`, true)
       await this.reply(errorTips)
@@ -44,6 +48,10 @@ export class SystemInfo extends plugin {
     const ret = await Bot.exec(cmds)
 
     if (ret.error) {
+      if (String(ret.error).includes("fastfetch: not found") || String(ret.stderr).includes("fastfetch: not found")) {
+        await this.reply("请确认FastFetch是否安装", true)
+        return
+      }
       logger.error(`系统信息错误：${logger.red(ret.error)}`)
       await this.reply(`系统信息错误：${ret.error}`, true)
       await this.reply(errorTips)

@@ -2,6 +2,9 @@ import puppeteer from "../../../lib/puppeteer/puppeteer.js"
 import hljs from "@highlightjs/cdn-assets/highlight.min.js"
 import { AnsiUp } from "ansi_up"
 const ansi_up = new AnsiUp
+const pendingCmds = new Map()
+
+const dangerousCmds = /(?:^|\s|&|\|)(rm|del|rd|rmdir|shutdown|reboot|halt|poweroff|mkfs|dd|format|taskkill|Remove-Item|Restart-Computer|Stop-Computer)(?:$|\s)/i
 
 const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`
 const tplFile = `${htmlDir}Code.html`
@@ -117,6 +120,76 @@ export class RemoteCommand extends plugin {
   async Shell() {
     if (!this.e.isMaster) return false
     const cmd = this.e.msg.replace(/#rcp?/, "").trim()
+
+    if (!dangerousCmds.test(cmd)) {
+      await this.execShell(cmd)
+      return
+    }
+
+    this.setContext("doConfirm")
+    pendingCmds.set(this.e.user_id, {
+      cmd,
+      isPic: false,
+      timer: setTimeout(() => {
+        pendingCmds.delete(this.e.user_id)
+        this.finish("doConfirm")
+        this.reply("操作已超时取消", true)
+      }, 30000)
+    })
+    await this.reply("危险命令，请在30秒内发送“确认”以继续执行。", true)
+  }
+
+  async ShellPic() {
+    if (!this.e.isMaster) return false
+    const cmd = this.e.msg.replace("#rcp", "").trim()
+
+    if (!dangerousCmds.test(cmd)) {
+      await this.execShellPic(cmd)
+      return
+    }
+
+    this.setContext("doConfirm")
+    pendingCmds.set(this.e.user_id, {
+      cmd,
+      isPic: true,
+      timer: setTimeout(() => {
+        pendingCmds.delete(this.e.user_id)
+        this.finish("doConfirm")
+        this.reply("操作已超时取消", true)
+      }, 30000)
+    })
+    await this.reply("危险命令，请在30秒内发送“确认”以继续执行。", true)
+  }
+
+  async doConfirm() {
+    if (!this.e.isMaster) return false
+    const { user_id } = this.e
+    const task = pendingCmds.get(user_id)
+
+    if (!task) {
+      this.finish("doConfirm")
+      return
+    }
+
+    if (this.e.msg === "确认") {
+      clearTimeout(task.timer)
+      pendingCmds.delete(user_id)
+      this.finish("doConfirm")
+
+      if (task.isPic) {
+        await this.execShellPic(task.cmd)
+      } else {
+        await this.execShell(task.cmd)
+      }
+    } else {
+      clearTimeout(task.timer)
+      pendingCmds.delete(user_id)
+      this.finish("doConfirm")
+      await this.reply("已取消", true)
+    }
+  }
+
+  async execShell(cmd) {
     const ret = await Bot.exec(...prompt(cmd))
 
     if (!ret.stdout && !ret.stderr && !ret.error)
@@ -129,9 +202,7 @@ export class RemoteCommand extends plugin {
       await this.reply(`标准错误输出：\n${ret.stderr}`, true)
   }
 
-  async ShellPic() {
-    if (!this.e.isMaster) return false
-    const cmd = this.e.msg.replace("#rcp", "").trim()
+  async execShellPic(cmd) {
     const ret = await Bot.exec(...prompt(cmd))
 
     if (!ret.stdout && !ret.stderr && !ret.error)
