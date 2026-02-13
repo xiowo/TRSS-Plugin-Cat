@@ -1,5 +1,9 @@
-node_modules
-Real-ESRGAN
-RemBG
-GenshinVoice
-ChatWaifu
+node_modules/
+data/
+*_test.js
+*test.*
+*.log
+.vscode/
+temp/
+*.css.map
+pnpm-lock.yaml
