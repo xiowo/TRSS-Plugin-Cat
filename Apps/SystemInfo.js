@@ -32,7 +32,7 @@ export class SystemInfo extends plugin {
     const ret = await Bot.exec(cmd)
 
     if (ret.error) {
-      if (String(ret.error).includes("fastfetch: not found") || String(ret.stderr).includes("fastfetch: not found")) {
+      if (String(ret.error).includes("Error: Command failed") || String(ret.stderr).includes("Error: Command failed")) {
         await this.reply("请确认FastFetch是否安装", true)
         return
       }
@@ -48,7 +48,7 @@ export class SystemInfo extends plugin {
     const ret = await Bot.exec(cmds)
 
     if (ret.error) {
-      if (String(ret.error).includes("fastfetch: not found") || String(ret.stderr).includes("fastfetch: not found")) {
+      if (String(ret.error).includes("Error: Command failed") || String(ret.stderr).includes("Error: Command failed")) {
         await this.reply("请确认FastFetch是否安装", true)
         return
       }
