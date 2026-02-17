@@ -4,6 +4,20 @@
 
 ## 安装教程
 
+```bash
+https://github.com/HolyFoxTeam/TRSS-Plugin-Cat
+```
+
+```bash
+pnpm i
+```
+
+<details><summary>更新</summary>
+
+- #核心调试更新
+
+</details>
+
 <details><summary>系统信息</summary>
 
 - #系统信息 / #系统信息图片
@@ -14,6 +28,12 @@
 <details><summary>二维码生成</summary>
 
 - #二维码/qr + `文字`
+
+</details>
+
+<details><summary>二维码扫描（权限：主人）</summary>
+
+- #识别二维码/qr + `二维码`
 
 </details>
 

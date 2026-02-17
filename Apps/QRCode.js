@@ -30,6 +30,7 @@ export class QRCode extends plugin {
   }
 
   async DecodeQR(e) {
+    if (!this.e.isMaster) return false
     let source = this.e.source
     if (!source) {
       const reply = this.e.message.find(i => i.type == "reply")
