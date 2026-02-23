@@ -5,7 +5,7 @@
 ## 安装教程
 
 ```bash
-https://github.com/HolyFoxTeam/TRSS-Plugin-Cat
+https://github.com/xiowo/TRSS-Plugin-Cat
 ```
 
 ```bash
