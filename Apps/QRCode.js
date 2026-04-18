@@ -1,6 +1,6 @@
 import QR from "qrcode"
-import { Jimp } from "jimp"
 import jsQR from "jsqr"
+import sharp from "sharp"
 
 export class QRCode extends plugin {
   constructor() {
@@ -64,9 +64,12 @@ export class QRCode extends plugin {
     }
 
     try {
-      const image = await Jimp.read(imgUrl)
-      const { data, width, height } = image.bitmap
-      const code = jsQR(data, width, height)
+      const res = await fetch(imgUrl)
+      if (!res.ok) throw new Error(`图片下载失败: ${res.status}`)
+      const buffer = Buffer.from(await res.arrayBuffer())
+
+      const { data, info } = await sharp(buffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      const code = jsQR(new Uint8ClampedArray(data), info.width, info.height)
 
       if (code) {
         await this.reply(`二维码内容：\n${code.data}`, true)
@@ -75,7 +78,7 @@ export class QRCode extends plugin {
       }
     } catch (err) {
       logger.error(`[识别二维码] 错误：${err}`)
-      await this.reply("识别失败，请稍后重试", true)
+      await this.reply("识别失败，请确认图片清晰且格式受支持", true)
     }
   }
 }
