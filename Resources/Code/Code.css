@@ -14,22 +14,28 @@
 }
 
 body {
-  width: 850px;
+  width: max-content;
+  min-width: 850px;
 }
 
 .container {
-  width: 850px;
+  width: max-content;
+  min-width: 850px;
   font-family: Inconsolata, monospace;
 }
 
 .box {
+  display: inline-block;
+  min-width: 810px;
+  max-width: none;
   padding: 10px;
   background: rgba(13, 13, 13, 0.8);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
   font-family: Inconsolata, monospace;
   color: #fff;
 }
