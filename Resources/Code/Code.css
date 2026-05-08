@@ -16,24 +16,26 @@
 body {
   width: max-content;
   min-width: 850px;
+  max-width: 3500px;
 }
 
 .container {
   width: max-content;
   min-width: 850px;
+  max-width: 3500px;
   font-family: Inconsolata, monospace;
 }
 
 .box {
   display: inline-block;
   min-width: 810px;
-  max-width: none;
+  max-width: 3460px;
   padding: 10px;
   background: rgba(13, 13, 13, 0.8);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  white-space: pre;
+  white-space: pre-wrap;
   overflow-wrap: normal;
   word-break: normal;
   font-family: Inconsolata, monospace;
