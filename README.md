@@ -5,7 +5,7 @@
 ## 安装教程
 
 ```bash
-https://github.com/xiowo/TRSS-Plugin-Cat
+git clone --depth 1 https://github.com/xiowo/TRSS-Plugin-Cat ./plugins/TRSS-Plugin-Cat
 ```
 
 ```bash
