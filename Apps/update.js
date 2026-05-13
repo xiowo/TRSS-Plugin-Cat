@@ -16,12 +16,12 @@ export class update extends plugin {
       priority: 1000,
       rule: [
         {
-          reg: `^#*(调试插件|${pluginName})(强制)?更新|^#*(强制)?更新(推送|${pluginName})(插件)?`,
-          fnc: "update"
+          reg: `^#?(调试插件|${pluginName})更新日志$`,
+          fnc: "update_log"
         },
         {
-          reg: `^#?(调试插件|${pluginName})更新日志`,
-          fnc: "update_log"
+          reg: `^#*(调试插件|${pluginName})(强制)?更新$|^#*(强制)?更新(推送|${pluginName})(插件)?$`,
+          fnc: "update"
         }
       ]
     })
