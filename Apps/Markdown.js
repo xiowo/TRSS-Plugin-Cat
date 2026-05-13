@@ -10,7 +10,7 @@ const tplFile = `${htmlDir}Markdown.html`
 export class Markdown extends plugin {
   constructor() {
     super({
-      name: "Markdown",
+      name: "[塔猫调试]Markdown渲染展示",
       dsc: "Markdown",
       event: "message",
       priority: 10,

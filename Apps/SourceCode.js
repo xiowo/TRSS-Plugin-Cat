@@ -9,7 +9,7 @@ const tplFile = `${htmlDir}SourceCode.html`
 export class SourceCode extends plugin {
   constructor() {
     super({
-      name: "SourceCode",
+      name: "[塔猫调试]源码渲染展示",
       dsc: "SourceCode",
       event: "message",
       priority: -Infinity,

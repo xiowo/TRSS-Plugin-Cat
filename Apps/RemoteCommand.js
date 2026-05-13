@@ -29,7 +29,7 @@ if (process.platform == "win32") {
 export class RemoteCommand extends plugin {
   constructor() {
     super({
-      name: "远程命令",
+      name: "[塔猫调试]远程命令",
       dsc: "远程命令",
       event: "message",
       priority: 10,

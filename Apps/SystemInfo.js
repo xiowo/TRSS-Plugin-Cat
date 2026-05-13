@@ -11,7 +11,7 @@ const htmlDir = `${process.cwd()}/plugins/TRSS-Plugin-Cat/Resources/Code/`,
 export class SystemInfo extends plugin {
   constructor() {
     super({
-      name: "系统信息",
+      name: "[塔猫调试]系统信息",
       dsc: "系统信息",
       event: "message",
       priority: 10,

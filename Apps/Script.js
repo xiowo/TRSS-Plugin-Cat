@@ -11,7 +11,7 @@ const errorTips = "出错了喵~"
 export class Script extends plugin {
   constructor() {
     super({
-      name: "脚本执行",
+      name: "[塔猫调试]脚本执行",
       dsc: "脚本执行",
       event: "message",
       priority: -Infinity,

@@ -5,7 +5,7 @@ import sharp from "sharp"
 export class QRCode extends plugin {
   constructor() {
     super({
-      name: "二维码生成",
+      name: "[塔猫调试]二维码生成",
       dsc: "二维码生成",
       event: "message",
       priority: 10,
