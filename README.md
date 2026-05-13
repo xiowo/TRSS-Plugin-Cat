@@ -1,8 +1,8 @@
-# TRSS Cat Yunzai Plugin
+# TRSS Yunzai Plugin Cat
 
-基于原插件精简，移除了一些不需要的功能
+基于原插件精简，移除了一些不需要的功能，同时优化了一些体验。
 
-## 安装教程
+## 安装方式
 
 ```bash
 git clone --depth 1 https://github.com/xiowo/TRSS-Plugin-Cat ./plugins/TRSS-Plugin-Cat
@@ -12,7 +12,9 @@ git clone --depth 1 https://github.com/xiowo/TRSS-Plugin-Cat ./plugins/TRSS-Plug
 pnpm i
 ```
 
-<details><summary>更新</summary>
+## 可用命令
+
+<details><summary>更新插件</summary>
 
 - #核心调试更新
 
@@ -37,13 +39,13 @@ pnpm i
 
 </details>
 
-<details><summary>Markdown（权限：主人）</summary>
+<details><summary>Markdown渲染展示（权限：主人）</summary>
 
 - #md + `文件` / `URL`
 
 </details>
 
-<details><summary>代码高亮（权限：主人）</summary>
+<details><summary>源码渲染展示（权限：主人）</summary>
 
 - #sc + `文件` / `URL`
 
